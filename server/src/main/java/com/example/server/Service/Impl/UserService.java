@@ -1,4 +1,6 @@
-package com.example.server.Service;
+package com.example.server.Service.Impl;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -6,7 +8,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.example.server.DTO.LoginRequest;
+import com.example.server.DTO.Response;
+import com.example.server.DTO.UserDTO;
+import com.example.server.Entity.User;
+import com.example.server.Exception.OurException;
+import com.example.server.Repository.UserRepository;
+import com.example.server.Service.Interface.IUserService;
+import com.example.server.Utils.JWTUtils;
+import com.example.server.Utils.Utils;
 
 @Service
 public class UserService implements IUserService {
@@ -187,4 +197,6 @@ public class UserService implements IUserService {
         }
         return response;
     }
+
+   
 }

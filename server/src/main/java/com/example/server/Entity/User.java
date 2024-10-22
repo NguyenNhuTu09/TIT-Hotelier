@@ -1,155 +1,79 @@
 package com.example.server.Entity;
-import java.time.LocalDateTime;
 
-import com.example.server.Enums.Role;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
+@Data
 @Entity
-@Table(name="User")
-public class User {
+@Table(name = "users")
+public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int ID;
-    
-    @Column(name = "firstLastName")
-    private String firstLastName;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(name = "phoneNumber")
-    private String phoneNumber;
-
-    @Column(name = "userName")
-    private String userName;
-
-    @Column(name = "passw")
-    private String passw;
-
-    @Column(name = "email")
+    @NotBlank(message = "Email is required")
+    @Column(unique = true)
     private String email;
 
-    @Column(name = "birthDay")
-    private LocalDateTime birthDay;
+    @NotBlank(message = "Name is required")
+    private String name;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "userRole")
-    private Role userRole;
-    
+    @NotBlank(message = "Phone Number is required")
+    private String phoneNumber;
 
-    @Column(name = "created_At")
-    private LocalDateTime created_At;
-    @Column(name = "updated_At")
-    private LocalDateTime updated_At;
+    @NotBlank(message = "Password is required")
+    private String password;
 
-    public User(){
+    private String role;
 
-    }
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Booking> bookings = new ArrayList<>();
 
-    public User(String firstLastName, String phoneNumber, String userName, String passw, String email,
-            LocalDateTime birthDay, Role userRole, LocalDateTime created_At, LocalDateTime updated_At) {
-        this.firstLastName = firstLastName;
-        this.phoneNumber = phoneNumber;
-        this.userName = userName;
-        this.passw = passw;
-        this.email = email;
-        this.birthDay = birthDay;
-        this.userRole = userRole;
-        this.created_At = created_At;
-        this.updated_At = updated_At;
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int iD) {
-        ID = iD;
-    }
-
-    public String getFirstLastName() {
-        return firstLastName;
-    }
-
-    public void setFirstLastName(String firstLastName) {
-        this.firstLastName = firstLastName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassw() {
-        return passw;
-    }
-
-    public void setPassw(String passw) {
-        this.passw = passw;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDateTime getBirthDay() {
-        return birthDay;
-    }
-
-    public void setBirthDay(LocalDateTime birthDay) {
-        this.birthDay = birthDay;
-    }
-
-    public Role getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(Role userRole) {
-        this.userRole = userRole;
-    }
-
-    public LocalDateTime getCreated_At() {
-        return created_At;
-    }
-
-    public void setCreated_At(LocalDateTime created_At) {
-        this.created_At = created_At;
-    }
-
-    public LocalDateTime getUpdated_At() {
-        return updated_At;
-    }
-
-    public void setUpdated_At(LocalDateTime updated_At) {
-        this.updated_At = updated_At;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
     @Override
-    public String toString() {
-        return "User [ID=" + ID + ", firstLastName=" + firstLastName + ", phoneNumber=" + phoneNumber + ", userName="
-                + userName + ", passw=" + passw + ", email=" + email + ", dateOfBirth=" + birthDay + ", userRole="
-                + userRole + ", created_At=" + created_At + ", updated_At=" + updated_At + "]";
+    public String getUsername() {
+        return email;
     }
-    
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

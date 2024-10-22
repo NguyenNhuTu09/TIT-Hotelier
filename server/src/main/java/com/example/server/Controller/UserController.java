@@ -1,39 +1,23 @@
 package com.example.server.Controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.server.Entity.User;
-import com.example.server.Service.Impl.UserService;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-
+import com.example.server.DTO.Response;
+import com.example.server.Service.Interface.IUserService;
 
 @RestController
 @RequestMapping("/users")
-@Tag(name = "User", description = "Operations related to users")
-public class UserController{
-    @Autowired
-    private UserService userService;
-
-    @GetMapping("/")
-    public List<User> getAllUser() {
-        return userService.getAllUser();
-    }
-
-    @Operation(summary = "Get user profile", description = "This API fetches the user's profile details.")
-    @GetMapping("/profile")
-    public String getUserProfile() {
-        return "User Profile Information";
-    }
+public class UserController {
 
 
     @Autowired
@@ -76,7 +60,4 @@ public class UserController{
     }
 
 
-    
-
-    
-} 
+}

@@ -1,10 +1,12 @@
 package com.example.server.Repository;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.time.LocalDate;
-import java.util.List;
+import com.example.server.Entity.Room;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
 

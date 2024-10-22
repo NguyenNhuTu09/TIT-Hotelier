@@ -1,8 +1,6 @@
 package com.example.server.Entity;
 
-public class Booking {
-    
-}
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
