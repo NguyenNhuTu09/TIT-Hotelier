@@ -15,7 +15,6 @@ import com.example.server.Entity.Booking;
 import com.example.server.Service.Interface.IBookingService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
-c
 @RestController
 @RequestMapping("/bookings")
 public class BookingController {
