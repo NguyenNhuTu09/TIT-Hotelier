@@ -18,7 +18,6 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/bookings")
-
 public class BookingController {
 
     @Autowired

@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.server.DTO.Response;
-import com.example.server.Service.Interface.IBookingService;
 import com.example.server.Service.Interface.IRoomService;
 
 @RestController
@@ -28,8 +27,6 @@ public class RoomController {
 
     @Autowired
     private IRoomService roomService;
-    @Autowired
-    private IBookingService iBookingService;
 
 
     @PostMapping("/add")

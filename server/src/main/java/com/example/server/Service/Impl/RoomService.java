@@ -13,9 +13,8 @@ import com.example.server.DTO.Response;
 import com.example.server.DTO.RoomDTO;
 import com.example.server.Entity.Room;
 import com.example.server.Exception.OurException;
-import com.example.server.Repository.BookingRepository;
 import com.example.server.Repository.RoomRepository;
-import com.example.server.Service.AwsS3Service;
+import com.example.server.Service.FileUploadService;
 import com.example.server.Service.Interface.IRoomService;
 import com.example.server.Utils.Utils;
 
@@ -25,17 +24,16 @@ public class RoomService implements IRoomService {
 
     @Autowired
     private RoomRepository roomRepository;
-    @Autowired
-    private BookingRepository bookingRepository;
-    @Autowired
-    private AwsS3Service awsS3Service;
 
+    @Autowired
+    private FileUploadService fileUploadService;
+   
     @Override
     public Response addNewRoom(MultipartFile photo, String roomType, BigDecimal roomPrice, String description) {
         Response response = new Response();
 
         try {
-            String imageUrl = awsS3Service.saveImageToS3(photo);
+            String imageUrl = fileUploadService.upload(photo).get("url").toString();
             Room room = new Room();
             room.setRoomPhotoUrl(imageUrl);
             room.setRoomType(roomType);
@@ -104,7 +102,7 @@ public class RoomService implements IRoomService {
         try {
             String imageUrl = null;
             if (photo != null && !photo.isEmpty()) {
-                imageUrl = awsS3Service.saveImageToS3(photo);
+                imageUrl = fileUploadService.upload(photo).get("url").toString();
             }
             Room room = roomRepository.findById(roomId).orElseThrow(() -> new OurException("Room Not Found"));
             if (roomType != null) room.setRoomType(roomType);

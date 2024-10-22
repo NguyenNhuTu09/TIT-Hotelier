@@ -16,7 +16,6 @@ import com.example.server.Repository.BookingRepository;
 import com.example.server.Repository.RoomRepository;
 import com.example.server.Repository.UserRepository;
 import com.example.server.Service.Interface.IBookingService;
-import com.example.server.Service.Interface.IRoomService;
 import com.example.server.Utils.Utils;
 
 @Service
@@ -24,8 +23,7 @@ public class BookingService implements IBookingService {
 
     @Autowired
     private BookingRepository bookingRepository;
-    @Autowired
-    private IRoomService roomService;
+   
     @Autowired
     private RoomRepository roomRepository;
     @Autowired
