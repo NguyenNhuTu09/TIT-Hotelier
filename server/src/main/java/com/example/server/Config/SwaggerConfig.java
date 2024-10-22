@@ -24,4 +24,8 @@ public class SwaggerConfig {
             .description("Documentation")
             .url("https://example.com"));
     }
+
+    
+
+    
 }

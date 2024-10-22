@@ -20,6 +20,7 @@ import com.example.server.Utils.Utils;
 
 @Service
 public class UserService implements IUserService {
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -35,7 +36,7 @@ public class UserService implements IUserService {
         Response response = new Response();
         try {
             if (user.getRole() == null || user.getRole().isBlank()) {
-                user.setRole("USER");
+                user.setRole("ADMIN");
             }
             if (userRepository.existsByEmail(user.getEmail())) {
                 throw new OurException(user.getEmail() + "Already Exists");
