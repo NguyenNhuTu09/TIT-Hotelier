@@ -13,8 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.server.Service.FileUploadService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/upload")
+@Tag(name = "Cloudinary API", description = "Đăng tải, lưu trữ ảnh")
 public class FileController {
 
     @Autowired

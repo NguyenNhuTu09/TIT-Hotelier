@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.server.DTO.Response;
 import com.example.server.Service.Interface.IUserService;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -28,7 +27,7 @@ public class UserController {
     private IUserService userService;
 
 
-    @Operation(summary = "Lấy tất cả người dùng")
+    // @Operation(summary = "Lấy tất cả người dùng")
     @GetMapping("/all")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Response> getAllUsers() {

@@ -15,8 +15,10 @@ import com.example.server.Entity.Booking;
 import com.example.server.Service.Interface.IBookingService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/bookings")
+@Tag(name = "Booking API", description = "Quản lý thông tin đặt phòng")
 public class BookingController {
 
     @Autowired

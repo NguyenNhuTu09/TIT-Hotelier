@@ -13,8 +13,11 @@ import com.example.server.DTO.Response;
 import com.example.server.Entity.User;
 import com.example.server.Service.Interface.IUserService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Authentication API", description = "Đăng ký, đăng nhập tài khoản")
 public class AuthController {
 
     @Autowired

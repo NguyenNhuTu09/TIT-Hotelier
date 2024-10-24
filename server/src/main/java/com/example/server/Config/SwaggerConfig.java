@@ -15,7 +15,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-            .info(new Info().title("My API")
+            .info(new Info().title("TITHotelier API System")
             .description("This is the API documentation for My Spring Boot Application.")
             .version("v1.0")
             .contact(new Contact().name("Your Name").email("your.email@example.com"))

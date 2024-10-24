@@ -24,9 +24,9 @@ public class UserService implements IUserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
     private JWTUtils jwtUtils;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -42,6 +42,7 @@ public class UserService implements IUserService {
                 throw new OurException(user.getEmail() + "Already Exists");
             }
             user.setPassword(passwordEncoder.encode(user.getPassword()));
+            // user.setPassword("123456");
             User savedUser = userRepository.save(user);
             UserDTO userDTO = Utils.mapUserEntityToUserDTO(savedUser);
             response.setStatusCode(200);
@@ -198,6 +199,7 @@ public class UserService implements IUserService {
         }
         return response;
     }
+
 
    
 }
