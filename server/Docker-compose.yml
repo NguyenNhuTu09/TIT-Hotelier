@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: tu1909
+      MYSQL_DATABASE: TITHotelier
+      MYSQL_USER: root
+      MYSQL_PASSWORD: tu1909
+    ports:
+      - "3306:3306"
+
+  springboot-app:
+    build: .
+    container_name: tit-hotelier-server
+    ports:
+      - "4040:4040"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/TITHotelier
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: tu1909
