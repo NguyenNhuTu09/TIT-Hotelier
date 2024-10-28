@@ -3,23 +3,23 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './component/common/Navbar';
-import FooterComponent from './component/common/Footer';
-import LoginPage from './component/auth/LoginPage';
-import RegisterPage from './component/auth/RegisterPage';
-import HomePage from './component/home/HomePage';
-import AllRoomsPage from './component/booking_rooms/AllRoomsPage';
-import RoomDetailsBookingPage from './component/booking_rooms/RoomDetailsPage';
-import FindBookingPage from './component/booking_rooms/FindBookingPage';
-import AdminPage from './component/admin/AdminPage';
-import ManageRoomPage from './component/admin/ManageRoomPage';
-import EditRoomPage from './component/admin/EditRoomPage';
-import AddRoomPage from './component/admin/AddRoomPage';
-import ManageBookingsPage from './component/admin/ManageBookingsPage';
-import EditBookingPage from './component/admin/EditBookingPage';
-import ProfilePage from './component/profile/ProfilePage';
-import EditProfilePage from './component/profile/EditProfilePage';
-import { ProtectedRoute, AdminRoute } from './service/guard';
+import Navbar from './Component/Common/Navbar';
+import FooterComponent from './Component/Common/Footer';
+import LoginPage from './Component/Auth/LoginPage';
+import RegisterPage from './component/Auth/RegisterPage';
+import HomePage from './Component/Home/HomePage';
+import AllRoomsPage from './Component/BookingRooms/AllRoomsPage';
+import RoomDetailsBookingPage from './Component/BookingRooms/RoomDetailsPage';
+import FindBookingPage from './Component/BookingRooms/FindBookingPage';
+import AdminPage from './Component/admin/AdminPage';
+import ManageRoomPage from './Component/Admin/ManageRoomPage';
+import EditRoomPage from '.Component/Admin/EditRoomPage';
+import AddRoomPage from './Component/Admin/AddRoomPage';
+import ManageBookingsPage from './Component/Admin/ManageBookingsPage';
+import EditBookingPage from './component/Admin/EditBookingPage';
+import ProfilePage from './Component/Profile/ProfilePage';
+import EditProfilePage from './Component/Profile/EditProfilePage';
+import { ProtectedRoute, AdminRoute } from './Service/guard';
 
 function App() {
   return (

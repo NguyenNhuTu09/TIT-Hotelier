@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ApiService from '../../service/ApiService.jsx';
+import ApiService from '../../Service/ApiService.jsx';
 
 
 const AddRoomPage = () => {
