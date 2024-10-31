@@ -17,10 +17,12 @@ CREATE TABLE User(
 
 DROP TABLE USER;
 
-SELECT * FROM USER;
+SELECT * FROM users;
 
 INSERT INTO User (ID, firstLastName, phoneNumber, userName, passw, email, birthDay, userRole, created_At, updated_At)
 VALUES (1, 'Nguyen Van A', '0987654321', 'nguyenvana', 'password123', 'nguyenvana@example.com', '1990-01-01', 'User', '2024-10-06', '2024-10-06');
 
-
+UPDATE users
+SET email = 'navia@gmail.com'
+WHERE ID = 2;
 

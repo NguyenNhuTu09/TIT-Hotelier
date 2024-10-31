@@ -21,11 +21,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.server.DTO.Response;
 import com.example.server.Service.Interface.IRoomService;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
+@SecurityRequirement(name="bearerAuth")
 @RequestMapping("/rooms")
-@Tag(name = "Room API", description = "Quản lý danh sách các phòng")
+// @Tag(name = "Room API", description = "Quản lý danh sách các phòng")
 public class RoomController {
 
     @Autowired

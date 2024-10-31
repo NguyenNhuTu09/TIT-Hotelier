@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import ApiService from '../../Service/ApiService.jsx';
+import { useParams, useNavigate } from 'react-router-dom';
+import ApiService from '../../Service/ApiService';
 
-
-const AddRoomPage = () => {
+const EditRoomPage = () => {
+    const { roomId } = useParams();
     const navigate = useNavigate();
     const [roomDetails, setRoomDetails] = useState({
         roomPhotoUrl: '',
@@ -15,23 +15,23 @@ const AddRoomPage = () => {
     const [preview, setPreview] = useState(null);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const [roomTypes, setRoomTypes] = useState([]);
-    const [newRoomType, setNewRoomType] = useState(false);
-
 
     useEffect(() => {
-        const fetchRoomTypes = async () => {
+        const fetchRoomDetails = async () => {
             try {
-                const types = await ApiService.getRoomTypes();
-                setRoomTypes(types);
+                const response = await ApiService.getRoomById(roomId);
+                setRoomDetails({
+                    roomPhotoUrl: response.room.roomPhotoUrl,
+                    roomType: response.room.roomType,
+                    roomPrice: response.room.roomPrice,
+                    roomDescription: response.room.roomDescription,
+                });
             } catch (error) {
-                console.error('Error fetching room types:', error.message);
+                setError(error.response?.data?.message || error.message);
             }
         };
-        fetchRoomTypes();
-    }, []);
-
-
+        fetchRoomDetails();
+    }, [roomId]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -40,18 +40,6 @@ const AddRoomPage = () => {
             [name]: value,
         }));
     };
-
-
-    const handleRoomTypeChange = (e) => {
-        if (e.target.value === 'new') {
-            setNewRoomType(true);
-            setRoomDetails(prevState => ({ ...prevState, roomType: '' }));
-        } else {
-            setNewRoomType(false);
-            setRoomDetails(prevState => ({ ...prevState, roomType: e.target.value }));
-        }
-    };
-
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
@@ -65,17 +53,7 @@ const AddRoomPage = () => {
     };
 
 
-    const addRoom = async () => {
-        if (!roomDetails.roomType || !roomDetails.roomPrice || !roomDetails.roomDescription) {
-            setError('All room details must be provided.');
-            setTimeout(() => setError(''), 5000);
-            return;
-        }
-
-        if (!window.confirm('Do you want to add this room?')) {
-            return
-        }
-
+    const handleUpdate = async () => {
         try {
             const formData = new FormData();
             formData.append('roomType', roomDetails.roomType);
@@ -86,30 +64,54 @@ const AddRoomPage = () => {
                 formData.append('photo', file);
             }
 
-            const result = await ApiService.addRoom(formData);
+            const result = await ApiService.updateRoom(roomId, formData);
             if (result.statusCode === 200) {
-                setSuccess('Room Added successfully.');
+                setSuccess('Room updated successfully.');
                 
                 setTimeout(() => {
                     setSuccess('');
                     navigate('/admin/manage-rooms');
                 }, 3000);
             }
+            setTimeout(() => setSuccess(''), 5000);
         } catch (error) {
             setError(error.response?.data?.message || error.message);
             setTimeout(() => setError(''), 5000);
         }
     };
 
+    const handleDelete = async () => {
+        if (window.confirm('Do you want to delete this room?')) {
+            try {
+                const result = await ApiService.deleteRoom(roomId);
+                if (result.statusCode === 200) {
+                    setSuccess('Room Deleted successfully.');
+                    
+                    setTimeout(() => {
+                        setSuccess('');
+                        navigate('/admin/manage-rooms');
+                    }, 3000);
+                }
+            } catch (error) {
+                setError(error.response?.data?.message || error.message);
+                setTimeout(() => setError(''), 5000);
+            }
+        }
+    };
+
     return (
-        <div className="edit-room-container border border-dark">
-            <h2>Add New Room</h2>
+        <div className="edit-room-container">
+            <h2>Edit Room</h2>
             {error && <p className="error-message">{error}</p>}
             {success && <p className="success-message">{success}</p>}
             <div className="edit-room-form">
                 <div className="form-group">
-                    {preview && (
+                    {preview ? (
                         <img src={preview} alt="Room Preview" className="room-photo-preview" />
+                    ) : (
+                        roomDetails.roomPhotoUrl && (
+                            <img src={roomDetails.roomPhotoUrl} alt="Room" className="room-photo" />
+                        )
                     )}
                     <input
                         type="file"
@@ -117,25 +119,14 @@ const AddRoomPage = () => {
                         onChange={handleFileChange}
                     />
                 </div>
-
                 <div className="form-group">
                     <label>Room Type</label>
-                    <select value={roomDetails.roomType} onChange={handleRoomTypeChange}>
-                        <option value="">Select a room type</option>
-                        {roomTypes.map(type => (
-                            <option key={type} value={type}>{type}</option>
-                        ))}
-                        <option value="new">Other (please specify)</option>
-                    </select>
-                    {newRoomType && (
-                        <input
-                            type="text"
-                            name="roomType"
-                            placeholder="Enter new room type"
-                            value={roomDetails.roomType}
-                            onChange={handleChange}
-                        />
-                    )}
+                    <input
+                        type="text"
+                        name="roomType"
+                        value={roomDetails.roomType}
+                        onChange={handleChange}
+                    />
                 </div>
                 <div className="form-group">
                     <label>Room Price</label>
@@ -154,10 +145,11 @@ const AddRoomPage = () => {
                         onChange={handleChange}
                     ></textarea>
                 </div>
-                <button className="update-button" onClick={addRoom}>Add Room</button>
+                <button className="update-button" onClick={handleUpdate}>Update Room</button>
+                <button className="delete-button" onClick={handleDelete}>Delete Room</button>
             </div>
         </div>
     );
 };
 
-export default AddRoomPage;
+export default EditRoomPage;

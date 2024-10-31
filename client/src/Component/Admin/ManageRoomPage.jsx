@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ApiService from '../../Service/ApiService';
 import {Pagination} from '../Common/Pagination';
 import {RoomResult} from '../Common/RoomResult';
-import {RoomSearch} from '../Common/RoomSearch';
 
-
-
-const AllRoomsPage = () => {
+const ManageRoomPage = () => {
   const [rooms, setRooms] = useState([]);
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [roomTypes, setRoomTypes] = useState([]);
   const [selectedRoomType, setSelectedRoomType] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [roomsPerPage] = useState(5);
-
-  const handleSearchResult = (results) => {
-    setRooms(results);
-    setFilteredRooms(results);
-  };
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -71,19 +64,23 @@ const AllRoomsPage = () => {
   return (
     <div className='all-rooms'>
       <h2>All Rooms</h2>
-      <div className='all-room-filter-div'>
-        <label>Filter by Room Type:</label>
-        <select value={selectedRoomType} onChange={handleRoomTypeChange}>
-          <option value="">All</option>
-          {roomTypes.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
+      <div className='all-room-filter-div' style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className='filter-select-div'>
+          <label>Filter by Room Type:</label>
+          <select value={selectedRoomType} onChange={handleRoomTypeChange}>
+            <option value="">All</option>
+            {roomTypes.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+          <button className='add-room-button' onClick={() => navigate('/admin/add-room')}>
+            Add Room
+          </button>
+        </div>
       </div>
-      
-      <RoomSearch handleSearchResult={handleSearchResult} />
+
       <RoomResult roomSearchResults={currentRooms} />
 
       <Pagination
@@ -96,4 +93,4 @@ const AllRoomsPage = () => {
   );
 };
 
-export default AllRoomsPage;
+export default ManageRoomPage;

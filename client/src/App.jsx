@@ -1,19 +1,15 @@
-
-
-// src/App.js
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './Component/Common/Navbar';
-import FooterComponent from './Component/Common/Footer';
-import LoginPage from './Component/Auth/LoginPage';
-import RegisterPage from './component/Auth/RegisterPage';
-import HomePage from './Component/Home/HomePage';
+import {Navbar} from './Component/Common/Navbar';
+import {LoginPage} from './Component/Auth/LoginPage';
+import {RegisterPage} from './Component/Auth/RegisterPage';
+import {HomePage} from './Component/Home/HomePage';
 import AllRoomsPage from './Component/BookingRooms/AllRoomsPage';
 import RoomDetailsBookingPage from './Component/BookingRooms/RoomDetailsPage';
 import FindBookingPage from './Component/BookingRooms/FindBookingPage';
 import AdminPage from './Component/admin/AdminPage';
 import ManageRoomPage from './Component/Admin/ManageRoomPage';
-import EditRoomPage from '.Component/Admin/EditRoomPage';
+import EditRoomPage from './Component/Admin/EditRoomPage';
 import AddRoomPage from './Component/Admin/AddRoomPage';
 import ManageBookingsPage from './Component/Admin/ManageBookingsPage';
 import EditBookingPage from './component/Admin/EditBookingPage';
@@ -70,7 +66,6 @@ function App() {
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         </div>
-        <FooterComponent />
       </div>
     </BrowserRouter>
   );

@@ -26,8 +26,6 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-
-    // @Operation(summary = "Lấy tất cả người dùng")
     @GetMapping("/all")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Response> getAllUsers() {
