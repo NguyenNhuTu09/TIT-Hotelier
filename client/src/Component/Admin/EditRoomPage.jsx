@@ -66,7 +66,7 @@ const EditRoomPage = () => {
 
             const result = await ApiService.updateRoom(roomId, formData);
             if (result.statusCode === 200) {
-                setSuccess('Room updated successfully.');
+                setSuccess('Cập nhật thông tin phòng thành công');
                 
                 setTimeout(() => {
                     setSuccess('');
@@ -81,11 +81,11 @@ const EditRoomPage = () => {
     };
 
     const handleDelete = async () => {
-        if (window.confirm('Do you want to delete this room?')) {
+        if (window.confirm('Bạn xác nhận xóa phòng này khỏi danh sách?')) {
             try {
                 const result = await ApiService.deleteRoom(roomId);
                 if (result.statusCode === 200) {
-                    setSuccess('Room Deleted successfully.');
+                    setSuccess('Xóa phòng thành công');
                     
                     setTimeout(() => {
                         setSuccess('');

@@ -21,7 +21,7 @@ const ManageRoomPage = () => {
         setRooms(allRooms);
         setFilteredRooms(allRooms);
       } catch (error) {
-        console.error('Error fetching rooms:', error.message);
+        console.error('Lỗi khi xem chi tiết thông tin phòng', error.message);
       }
     };
 
@@ -30,7 +30,7 @@ const ManageRoomPage = () => {
         const types = await ApiService.getRoomTypes();
         setRoomTypes(types);
       } catch (error) {
-        console.error('Error fetching room types:', error.message);
+        console.error('Lỗi khi xem chi tiết thông tin loại đặt phòng', error.message);
       }
     };
 

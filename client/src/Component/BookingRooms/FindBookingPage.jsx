@@ -8,7 +8,7 @@ const FindBookingPage = () => {
 
     const handleSearch = async () => {
         if (!confirmationCode.trim()) {
-            setError("Please Enter a booking confirmation code");
+            setError("Vui lòng nhập mã xác nhận đặt phòng");
             setTimeout(() => setError(''), 5000);
             return;
         }
@@ -25,16 +25,16 @@ const FindBookingPage = () => {
 
     return (
         <div className="find-booking-page">
-            <h2>Find Booking</h2>
+            <h2>Tìm kiếm đặt chỗ</h2>
             <div className="search-container">
                 <input
                     required
                     type="text"
-                    placeholder="Enter your booking confirmation code"
+                    placeholder="Vui lòng nhập mã xác nhận"
                     value={confirmationCode}
                     onChange={(e) => setConfirmationCode(e.target.value)}
                 />
-                <button onClick={handleSearch}>Find</button>
+                <button onClick={handleSearch}>Tìm kiếm</button>
             </div>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {bookingDetails && (

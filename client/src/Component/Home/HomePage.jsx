@@ -19,9 +19,9 @@ export const HomePage = () => {
                     <div className="overlay"></div>
                     <div className="animated-texts overlay-content">
                         <h1>
-                            Welcome to <span className="phegon-color">TITHotelier</span>
+                            Chào mừng đến với <span className="phegon-color">TITHotelier</span>
                         </h1><br />
-                        <h3>Step into a haven of comfort and care</h3>
+                        <h3>Dịch vụ quản lý phòng khách sạn, du lịch </h3>
                     </div>
                 </header>
             </section>
@@ -30,9 +30,9 @@ export const HomePage = () => {
             <RoomSearch handleSearchResult={handleSearchResult} />
             <RoomResult roomSearchResults={roomSearchResults} />
 
-            <h4><a className="view-rooms-home" href="/rooms">All Rooms</a></h4>
+            <h4><a className="view-rooms-home" href="/rooms">Tất cả phòng</a></h4>
 
-            <h2 className="home-services">Services at <span className="phegon-color">TITHotelier</span></h2>
+            <h2 className="home-services">Các dịch vụ hiện có tại <span className="phegon-color">TITHotelier</span></h2>
 
             {/* SERVICES SECTION */}
             <section className="service-section"><div className="service-card">

@@ -11,7 +11,7 @@ const AdminPage = () => {
                 const response = await ApiService.getUserProfile();
                 setAdminName(response.user.name);
             } catch (error) {
-                console.error('Error fetching admin details:', error.message);
+                console.error('Lỗi khi tải thông tin chi tiết của Quản trị viên:', error.message);
             }
         };
 
@@ -20,7 +20,7 @@ const AdminPage = () => {
 
     return (
         <div className="admin-page">
-            <h1 className="welcome-message">Welcome, {adminName}</h1>
+            <h1 className="welcome-message">Chào mừng, {adminName}</h1>
             <div className="admin-actions">
                 <button className="admin-button" onClick={() => navigate('/admin/manage-rooms')}>
                     Manage Rooms

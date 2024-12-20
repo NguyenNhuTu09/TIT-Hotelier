@@ -16,7 +16,7 @@ export const LoginPage = () => {
         e.preventDefault();
 
         if (!email || !password) {
-            setError('Please fill in all fields.');
+            setError('Vui lòng nhập đầy đủ thông tin');
             setTimeout(() => setError(''), 5000);
             return;
         }

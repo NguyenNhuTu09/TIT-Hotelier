@@ -17,7 +17,7 @@ export const RoomSearch = ({ handleSearchResult }) => {
         const types = await ApiService.getRoomTypes();
         setRoomTypes(types);
       } catch (error) {
-        console.error('Error fetching room types:', error.message);
+        console.error('Lỗi khi xem loại phòng:', error.message);
       }
     };
     fetchRoomTypes();
@@ -32,7 +32,7 @@ export const RoomSearch = ({ handleSearchResult }) => {
 
   const handleInternalSearch = async () => {
     if (!startDate || !endDate || !roomType) {
-      showError('Please select all fields');
+      showError('Vui lòng nhập đầy đủ thông tin');
       return false;
     }
     try {
@@ -42,14 +42,14 @@ export const RoomSearch = ({ handleSearchResult }) => {
 
       if (response.statusCode === 200) {
         if (response.roomList.length === 0) {
-          showError('Room not currently available for this date range on the selected rom type.');
+          showError('Loại phòng bạn chọn hiện đã đầy, vui lòng chọn loại khác');
           return
         }
         handleSearchResult(response.roomList);
         setError('');
       }
     } catch (error) {
-      showError("Unown error occured: " + error.response.data.message);
+      showError("Lỗi không xác định: " + error.response.data.message);
     }
   };
 
@@ -62,7 +62,7 @@ export const RoomSearch = ({ handleSearchResult }) => {
             selected={startDate}
             onChange={(date) => setStartDate(date)}
             dateFormat="dd/MM/yyyy"
-            placeholderText="Select Check-in Date"
+            placeholderText="Ngày nhận phòng"
           />
         </div>
         <div className="search-field">
@@ -71,15 +71,15 @@ export const RoomSearch = ({ handleSearchResult }) => {
             selected={endDate}
             onChange={(date) => setEndDate(date)}
             dateFormat="dd/MM/yyyy"
-            placeholderText="Select Check-out Date"
+            placeholderText="Ngày trả phòng"
           />
         </div>
 
         <div className="search-field">
-          <label>Room Type</label>
+          <label>Loại phòng</label>
           <select value={roomType} onChange={(e) => setRoomType(e.target.value)}>
             <option disabled value="">
-              Select Room Type
+              Chọn loại phòng
             </option>
             {roomTypes.map((roomType) => (
               <option key={roomType} value={roomType}>
@@ -89,7 +89,7 @@ export const RoomSearch = ({ handleSearchResult }) => {
           </select>
         </div>
         <button className="home-search-button" onClick={handleInternalSearch}>
-          Search Rooms
+          Tìm phòng
         </button>
       </div>
       {error && <p className="error-message">{error}</p>}

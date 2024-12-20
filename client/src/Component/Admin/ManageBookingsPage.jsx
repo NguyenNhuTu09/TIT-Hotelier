@@ -19,7 +19,7 @@ const ManageBookingsPage = () => {
                 setBookings(allBookings);
                 setFilteredBookings(allBookings);
             } catch (error) {
-                console.error('Error fetching bookings:', error.message);
+                console.error('Lỗi khi xem chi tiết thong tin đặt phòng', error.message);
             }
         };
 

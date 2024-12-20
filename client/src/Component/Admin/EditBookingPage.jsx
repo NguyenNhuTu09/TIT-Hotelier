@@ -26,14 +26,14 @@ const EditBookingPage = () => {
 
 
     const acheiveBooking = async (bookingId) => {
-        if (!window.confirm('Are you sure you want to Acheive this booking?')) {
+        if (!window.confirm('Bạn có chắc chắn xác nhận đặt chỗ này không?')) {
             return; // Do nothing if the user cancels
         }
 
         try {
             const response = await ApiService.cancelBooking(bookingId);
             if (response.statusCode === 200) {
-                setSuccessMessage("The boking was Successfully Acheived")
+                setSuccessMessage("Phòng đã đặt thành công")
                 
                 setTimeout(() => {
                     setSuccessMessage('');

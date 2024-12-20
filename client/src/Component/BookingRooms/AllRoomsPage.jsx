@@ -28,7 +28,7 @@ const AllRoomsPage = () => {
         setRooms(allRooms);
         setFilteredRooms(allRooms);
       } catch (error) {
-        console.error('Error fetching rooms:', error.message);
+        console.error('Lỗi khi xem thông tin phòng', error.message);
       }
     };
 
@@ -37,7 +37,7 @@ const AllRoomsPage = () => {
         const types = await ApiService.getRoomTypes();
         setRoomTypes(types);
       } catch (error) {
-        console.error('Error fetching room types:', error.message);
+        console.error('Lỗi khi xem loại phòng', error.message);
       }
     };
 

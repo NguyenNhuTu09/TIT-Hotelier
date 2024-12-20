@@ -42,13 +42,13 @@ const RoomDetailsPage = () => {
 
   const handleConfirmBooking = async () => {
     if (!checkInDate || !checkOutDate) {
-      setErrorMessage('Please select check-in and check-out dates.');
+      setErrorMessage('Vui lòng chọn ngày nhận phòng và ngày trả phòng');
       setTimeout(() => setErrorMessage(''), 5000); 
       return;
     }
 
     if (isNaN(numAdults) || numAdults < 1 || isNaN(numChildren) || numChildren < 0) {
-      setErrorMessage('Please enter valid numbers for adults and children.');
+      setErrorMessage('Vui lòng nhập số lượng người lớn và trẻ em');
       setTimeout(() => setErrorMessage(''), 5000); 
       return;
     }
@@ -73,8 +73,8 @@ const RoomDetailsPage = () => {
       const startDate = new Date(checkInDate);
       const endDate = new Date(checkOutDate);
 
-      console.log("Original Check-in Date:", startDate);
-      console.log("Original Check-out Date:", endDate);
+      console.log("Ngày nhận phòng", startDate);
+      console.log("Ngày trả phòng", endDate);
 
       const formattedCheckInDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
       const formattedCheckOutDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
@@ -110,7 +110,7 @@ const RoomDetailsPage = () => {
   };
 
   if (isLoading) {
-    return <p className='room-detail-loading'>Loading room details...</p>;
+    return <p className='room-detail-loading'>Đang tải thông tin phòng</p>;
   }
 
   if (error) {
@@ -118,7 +118,7 @@ const RoomDetailsPage = () => {
   }
 
   if (!roomDetails) {
-    return <p className='room-detail-loading'>Room not found.</p>;
+    return <p className='room-detail-loading'>Phòng không tồn tại</p>;
   }
 
   const { roomType, roomPrice, roomPhotoUrl, description, bookings } = roomDetails;
@@ -127,7 +127,7 @@ const RoomDetailsPage = () => {
     <div className="room-details-booking">
       {showMessage && (
         <p className="booking-success-message">
-          Booking successful! Confirmation code: {confirmationCode}. An SMS and email of your booking details have been sent to you.
+          Đặt phòng thành công, đây là mã xác nhận: {confirmationCode}. Tin nhắn SMS và Email về thông tin đặt chỗ đã được gửi đến bạn
         </p>
       )}
       {errorMessage && (

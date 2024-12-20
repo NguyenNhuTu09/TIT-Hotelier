@@ -48,7 +48,7 @@ export const RegisterPage = () => {
                     password: '',
                     phoneNumber: ''
                 });
-                setSuccessMessage('User registered successfully');
+                setSuccessMessage('Đăng ký tài khoản người dùng thành công');
                 setTimeout(() => {
                     setSuccessMessage('');
                     navigate('/');

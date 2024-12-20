@@ -9,7 +9,7 @@ export const Navbar = () =>  {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        const isLogout = window.confirm('Are you sure you want to logout this user?');
+        const isLogout = window.confirm('Xác nhận đăng xuất');
         if (isLogout) {
             ApiService.logout();
             navigate('/home');
@@ -22,15 +22,15 @@ export const Navbar = () =>  {
                 <NavLink to="/home">TITHotelier</NavLink>
             </div>
             <ul className="navbar-ul">
-                <li><NavLink to="/home" activeclassname="active">Home</NavLink></li>
-                <li><NavLink to="/rooms" activeclassname="active">Rooms</NavLink></li>
-                <li><NavLink to="/find-booking" activeclassname="active">Find my Booking</NavLink></li>
+                <li><NavLink to="/home" activeclassname="active">Trang chủ</NavLink></li>
+                <li><NavLink to="/rooms" activeclassname="active">Danh sách phòng</NavLink></li>
+                <li><NavLink to="/find-booking" activeclassname="active">Tìm kiếm</NavLink></li>
 
-                {isUser && <li><NavLink to="/profile" activeclassname="active">Profile</NavLink></li>}
-                {isAdmin && <li><NavLink to="/admin" activeclassname="active">Admin</NavLink></li>}
+                {isUser && <li><NavLink to="/profile" activeclassname="active">Thông tin</NavLink></li>}
+                {isAdmin && <li><NavLink to="/admin" activeclassname="active">Quản lý</NavLink></li>}
 
-                {!isAuthenticated &&<li><NavLink to="/login" activeclassname="active">Login</NavLink></li>}
-                {!isAuthenticated &&<li><NavLink to="/register" activeclassname="active">Register</NavLink></li>}
+                {!isAuthenticated &&<li><NavLink to="/login" activeclassname="active">Đăng nhập</NavLink></li>}
+                {!isAuthenticated &&<li><NavLink to="/register" activeclassname="active">Đăng ký</NavLink></li>}
                 {isAuthenticated && <li onClick={handleLogout}>Logout</li>}
             </ul>
         </nav>
